@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitGutter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3>SERVICES</h3>
+            </div>
+            <div class="sidebar-content">
+                <div class="service-category">
+                    <div class="category-header" onclick="toggleCategory('cloud')">
+                        <i class="fas fa-cloud"></i>
+                        <span>Cloud Providers</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-items" id="cloud">
+                        <div class="service-item" onclick="fillSearch('api-gateway.amazonaws.com')">
+                            <span>AWS API Gateway</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('lambda.amazonaws.com')">
+                            <span>AWS Lambda</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('s3.amazonaws.com')">
+                            <span>AWS S3</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('cloudfunctions.googleapis.com')">
+                            <span>Google Cloud Functions</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('azurewebsites.net')">
+                            <span>Azure Functions</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.digitalocean.com')">
+                            <span>DigitalOcean API</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-category">
+                    <div class="category-header" onclick="toggleCategory('payment')">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Payment Services</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-items" id="payment">
+                        <div class="service-item" onclick="fillSearch('api.stripe.com/v1')">
+                            <span>Stripe</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api-m.paypal.com')">
+                            <span>PayPal</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('connect.squareup.com/v2')">
+                            <span>Square</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.braintreegateway.com/merchants')">
+                            <span>Braintree</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.adyen.com/v70')">
+                            <span>Adyen</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-category">
+                    <div class="category-header" onclick="toggleCategory('auth')">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Authentication</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-items" id="auth">
+                        <div class="service-item" onclick="fillSearch('auth0.com/oauth')">
+                            <span>Auth0</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('identitytoolkit.googleapis.com')">
+                            <span>Firebase Auth</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.okta.com/v1')">
+                            <span>Okta</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('cognito-idp.amazonaws.com')">
+                            <span>AWS Cognito</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('supabase.com/auth/v1')">
+                            <span>Supabase Auth</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-category">
+                    <div class="category-header" onclick="toggleCategory('database')">
+                        <i class="fas fa-database"></i>
+                        <span>Databases</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-items" id="database">
+                        <div class="service-item" onclick="fillSearch('mongodb+srv://')">
+                            <span>MongoDB Atlas</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('postgresql://')">
+                            <span>PostgreSQL</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('redis://')">
+                            <span>Redis</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('dynamodb.amazonaws.com')">
+                            <span>AWS DynamoDB</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('firestore.googleapis.com/v1')">
+                            <span>Firebase Firestore</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('supabase.com/rest/v1')">
+                            <span>Supabase</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-category">
+                    <div class="category-header" onclick="toggleCategory('communication')">
+                        <i class="fas fa-comments"></i>
+                        <span>Communication</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-items" id="communication">
+                        <div class="service-item" onclick="fillSearch('api.twilio.com/2010-04-01')">
+                            <span>Twilio</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.sendgrid.com/v3')">
+                            <span>SendGrid</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.mailgun.net/v3')">
+                            <span>Mailgun</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('slack.com/api')">
+                            <span>Slack</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('discord.com/api/v10')">
+                            <span>Discord</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.telegram.org/bot')">
+                            <span>Telegram</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-category">
+                    <div class="category-header" onclick="toggleCategory('storage')">
+                        <i class="fas fa-hdd"></i>
+                        <span>File Storage</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-items" id="storage">
+                        <div class="service-item" onclick="fillSearch('s3.amazonaws.com')">
+                            <span>AWS S3</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('storage.googleapis.com/v1')">
+                            <span>Google Cloud Storage</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('blob.core.windows.net')">
+                            <span>Azure Blob</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.cloudinary.com/v1_1')">
+                            <span>Cloudinary</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.dropboxapi.com/2')">
+                            <span>Dropbox</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-category">
+                    <div class="category-header" onclick="toggleCategory('analytics')">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Analytics</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-items" id="analytics">
+                        <div class="service-item" onclick="fillSearch('analyticsdata.googleapis.com/v1beta')">
+                            <span>Google Analytics 4</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.mixpanel.com/2.0')">
+                            <span>Mixpanel</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.amplitude.com/2')">
+                            <span>Amplitude</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.segment.io/v1')">
+                            <span>Segment</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.hotjar.com/v1')">
+                            <span>Hotjar</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-category">
+                    <div class="category-header" onclick="toggleCategory('maps')">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Maps & Location</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-items" id="maps">
+                        <div class="service-item" onclick="fillSearch('maps.googleapis.com/maps/api')">
+                            <span>Google Maps</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.mapbox.com/v5')">
+                            <span>Mapbox</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.openstreetmap.org')">
+                            <span>OpenStreetMap</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.here.com/v7')">
+                            <span>Here Maps</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.tomtom.com/v2')">
+                            <span>TomTom</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-category">
+                    <div class="category-header" onclick="toggleCategory('ai')">
+                        <i class="fas fa-brain"></i>
+                        <span>AI & ML</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-items" id="ai">
+                        <div class="service-item" onclick="fillSearch('api.openai.com/v1')">
+                            <span>OpenAI</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.anthropic.com/v1')">
+                            <span>Anthropic</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('generativelanguage.googleapis.com/v1beta')">
+                            <span>Google AI</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('openai.azure.com/openai/deployments')">
+                            <span>Azure OpenAI</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.huggingface.co/inference')">
+                            <span>Hugging Face</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.cohere.ai/v1')">
+                            <span>Cohere</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-category">
+                    <div class="category-header" onclick="toggleCategory('social')">
+                        <i class="fas fa-share-alt"></i>
+                        <span>Social Media</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-items" id="social">
+                        <div class="service-item" onclick="fillSearch('api.twitter.com/2')">
+                            <span>Twitter</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('graph.facebook.com/v18.0')">
+                            <span>Facebook</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('graph.instagram.com/v18.0')">
+                            <span>Instagram</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('api.linkedin.com/v2')">
+                            <span>LinkedIn</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('www.googleapis.com/youtube/v3')">
+                            <span>YouTube</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('open.tiktokapis.com/v2')">
+                            <span>TikTok</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="service-category">
+                    <div class="category-header" onclick="toggleCategory('patterns')">
+                        <i class="fas fa-code"></i>
+                        <span>Code Patterns</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="category-items" id="patterns">
+                        <div class="service-item" onclick="fillSearch('Authorization: Bearer')">
+                            <span>Bearer Token Auth</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('X-API-Key')">
+                            <span>API Key Auth</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('OAuth 2.0')">
+                            <span>OAuth 2.0</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('JWT token')">
+                            <span>JWT Authentication</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('Basic auth')">
+                            <span>Basic Authentication</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('Access-Control-Allow-Origin')">
+                            <span>CORS Headers</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('Rate limiting')">
+                            <span>Rate Limiting</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('Webhook')">
+                            <span>Webhook Endpoints</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('GraphQL')">
+                            <span>GraphQL API</span>
+                        </div>
+                        <div class="service-item" onclick="fillSearch('REST API')">
+                            <span>REST API</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Header -->
+                <header class="header">
+                    <div class="header-content">
+                        <p>GitGutter | Search strings and env/config files in millions of repositories</p>
+                    </div>
+                </header>
+
+                <!-- Search Form -->
+                <div class="search-section">
+                    <form id="searchForm" class="search-form">
+                        <div class="search-row">
+                            <div class="search-input-group">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="query" name="query" placeholder="Enter search query..." required>
+                            </div>
+                            <button type="submit" class="search-btn">
+                                <i class="fas fa-search"></i>
+                                Search
+                            </button>
+                        </div>
+                        
+                        <div class="search-options">
+                            <div class="option-group">
+                                <label for="language">Language</label>
+                                <input type="text" id="language" name="language" placeholder="python, javascript">
+                            </div>
+                            
+                            <div class="option-group">
+                                <label for="sort">Sort</label>
+                                <select id="sort" name="sort">
+                                    <option value="indexed">Date (Newest)</option>
+                                    <option value="best-match">Best Match</option>
+                                </select>
+                            </div>
+                            
+                            <div class="option-group">
+                                <label for="per_page">Results</label>
+                                <select id="per_page" name="per_page">
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                </select>
+                            </div>
+
+                            <div class="option-group">
+                                <label for="file_filter_type">File Filter</label>
+                                <select id="file_filter_type" name="file_filter_type">
+                                    <option value="">No Filter</option>
+                                    <option value="include">Include Only</option>
+                                    <option value="exclude">Exclude</option>
+                                </select>
+                            </div>
+
+                            <div class="option-group">
+                                <label for="file_extensions">Extensions</label>
+                                <input type="text" id="file_extensions" name="file_extensions" placeholder="py,js,ts,java (or .py,.js,.ts,.java)" disabled>
+                                <small class="input-hint">Separate with commas, with or without dots</small>
+                            </div>
+
+                            <div class="option-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="check_config_files" name="check_config_files">
+                                    <span class="checkmark"></span>
+                                    Check for config files
+                                </label>
+                                <small class="input-hint">Searches for .env, .config, .yaml, etc. in repositories (slower)</small>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Feeling Bored Section -->
+                <div id="feelingBored" class="feeling-bored-section">
+                    <div class="feeling-bored-header">
+                        <h3>Feeling bored?</h3>
+                        <button class="refresh-btn" onclick="refreshRandomChips()" title="Get new suggestions">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                    <div class="random-chips" id="randomChips">
+                        <!-- Random API chips will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Loading Indicator -->
+                <div id="loading" class="loading hidden">
+                    <div class="spinner"></div>
+                    <p>Searching...</p>
+                </div>
+
+                <!-- Results Section -->
+                <div id="results" class="results-section hidden">
+                    <div class="results-header">
+                        <h2 id="resultsTitle">Results</h2>
+                        <div class="results-stats">
+                            <span id="resultsCount">0 results</span>
+                        </div>
+                    </div>
+                    
+                    <div id="resultsList" class="results-list">
+                        <!-- Results will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Error Message -->
+                <div id="error" class="error hidden">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span id="errorMessage"></span>
+                </div>
+
+                <!-- Commit History Modal -->
+                <div id="commitModal" class="modal hidden">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 id="modalTitle">Commit History</h3>
+                            <button class="close-btn" onclick="closeCommitModal()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="commitLoading" class="loading">
+                                <div class="spinner"></div>
+                                <p>Loading commits...</p>
+                            </div>
+                            <div id="commitList" class="commit-list hidden">
+                                <!-- Commits will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Details Overlay -->
+                <div id="detailsOverlay" class="details-overlay hidden">
+                    <div class="details-content">
+                        <div class="details-header">
+                            <h3 id="detailsTitle">File Details</h3>
+                            <button class="close-btn" onclick="closeDetailsOverlay()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- File Tree Section -->
+                        <div class="file-tree-section">
+                            <div class="file-tree-header">
+                                <h4><i class="fas fa-folder-tree"></i> Repository Files</h4>
+                            </div>
+                            <div id="fileTree" class="file-tree">
+                                <!-- File tree will be inserted here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Details Content Section -->
+                        <div class="details-content-section">
+                            <div id="detailsLoading" class="loading">
+                                <div class="spinner"></div>
+                                <p>Loading details...</p>
+                            </div>
+                            <div id="detailsContent" class="details-content-inner hidden">
+                                <!-- Details content will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html> 
