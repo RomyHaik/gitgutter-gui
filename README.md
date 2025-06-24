@@ -1,7 +1,6 @@
 # GitGutter GUI
-
-A modern web-based interface for searching code across GitHub repositories using the GitHub API. Features a beautiful, responsive web interface with advanced search capabilities and real-time results.
-
+A web-based interface for searching code across GitHub repositories using the GitHub API.
+![GitGutter WEB GUI screenshot](https://github.com/user-attachments/assets/e3aeced8-7d3e-473d-b55f-315f793de50f)
 ## Features
 
 - 🌐 **Web Interface**: Modern, responsive web application
